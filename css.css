@@ -1,0 +1,29 @@
+*{margin: 0;
+padding:0;
+}
+
+html,body{
+    height: 100%;
+}
+#user{
+    width:10px;
+    height: 10px;
+    background: blue;
+    position: absolute;
+}
+#user_2{
+    width:10px;
+    height: 10px;
+    background: red;
+    position: absolute;
+   
+}
+#map{
+    
+    position: relative;
+    border: #999 solid 10px;
+    box-sizing: border-box;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
