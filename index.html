@@ -2,15 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <title>Hide-and-seek</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:700" rel="stylesheet">
+    <script src="jquery-1.12.3.min.js"></script>
     <script src="js.js"></script>
     <link href="css.css" rel="stylesheet">
 </head>
 <body>
+  <div id="start">
+  		<span>3</span>
+  		<span>2</span>
+  		<span>1</span>
+  </div>
    <div id="map">
         <div id="user"> </div>
         <div id="user_2"></div>
+    </div>
+    
+    <div id="left">
+        
+    </div>
+    <div id="right">
+        
+    </div>
+
+    <div id="result">
+        <div class="title">
+            <span></span> WIN
+        </div>
+        <div class="center">
+            <span onclick="regame()">Back To</span>
+        </div>
     </div>
 </body>
 </html>

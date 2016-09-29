@@ -4,6 +4,26 @@ padding:0;
 
 html,body{
     height: 100%;
+    overflow: hidden;
+}
+#start{
+	font-family: 'Oswald', sans-serif;
+	width:100%;
+	height: 100%;
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	background: #333;
+	color: #fff;
+	font-size: 300px;
+}
+#start>span{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	display: none;
 }
 #user{
     width:10px;
@@ -21,9 +41,63 @@ html,body{
 #map{
     
     position: relative;
-    border: #999 solid 10px;
+    border: red solid 10px;
     box-sizing: border-box;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+}
+#left{
+    width:30px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left:-30px;
+    background:red; 
+}
+#right{
+    width:30px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right:-30px;
+    background: blue;
+}
+#result{
+    width:0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: rgba(0,0,0,0.9);
+    font-family: 'Oswald', sans-serif;
+    display: none;
+}
+#result>.title{
+    width:100%;
+    height: 100px;
+    color: #fff;
+    text-align: center;
+    font-size: 100px;
+}
+#result>.title>.blue{
+    color: blue;
+}
+#result>.title>.red{
+    color: red;
+}
+#result>.center{
+    width:100%;
+    height: 50px;
+    position: relative;
+    top: 40%;
+    cursor: pointer;
+    color: #fff;
+    font-size: 50px;
+    text-align: center;
+    transform: translate(0,-50%);
+    text-decoration: underline;
+}
+#result>.center>span:hover{
+    
 }
