@@ -23,75 +23,20 @@ var boder_c = 0;
 var last = true;
 
 //start
-var stat_t = false;
-
-//timer start
-var timeStart = false;
-
-//plus num
-var plus_num = 0;
-
-//plus posi
-var plus_l = 0;
-var plus_t = 0;
-
-//keystart
-var key_s = false;
-
-//now user
-var nowUser;
-
-//key_no
-var key_no = true;
-
+var stat_t = true;
 $(function () {
     
-//	var map_border =  setInterval(function(){
-//		if(timeStart == true){
-//        	
-//		}
-//    },10000)
-	
-       
-        
-	
-		var timer = setInterval(function(){
-			if(timeStart == true){
-				
-				var time = $("#timer>span").html()-1;
-				
-					if(time > 0){
-						$("#timer>span").html(time);
-					}else{
-						
-						boderColor();
-					}
-				var rand = Math.floor(Math.random() * 9);
-				var posi = $("#map").offset();
-				
-				
-			}
-		},1000)
-	
-	   var plus_f = setInterval(function(){
-                        
-						plus_l = 10 * Math.floor(Math.random() * 45)+1;
-					
-						plus_t = 10 * Math.floor(Math.random() * 45)+1;	
-					
-						$("#map").append("<div id='plus'></div>");
-						$("#plus").css({"width":"10px","height":"10px",
-									"position":"absolute",
-										"top":plus_t+"px","left":plus_l+"px",
-									   "background":"#009688","display":"block"});
-                        key_no = true;
-				
-       },5000)
 	var start = setInterval(function(){
 		if(stat_t){
+			if(sessionStorage.getItem("start") == "true"){
+				$("#start").css({"display":"none"});
+				user_position();
+				stat_t = false;
+			}else{
 				starting();
+			}
 		}
-	},1100);
+	},1200);
 	
     $("#map").css({"width":map_with+"px","height":map_hei+"px"});
     var map_r = map_with;
@@ -103,8 +48,10 @@ $(function () {
 //        map();
 //    },5000)
 
+    var map_border =  setInterval(function(){
+        boderColor();
+    },10000)
     
-
     $('body').keydown(function (e) {
         
         var maps = $("#map").offset();
@@ -113,7 +60,6 @@ $(function () {
         
         var key = e.keyCode;
         
-        key_s == false?key=false:true;
         
 //        user1
         if(key === 37){
@@ -173,7 +119,6 @@ $(function () {
             
         
     });
-
 });
 
 
@@ -203,12 +148,10 @@ function starting(){
 			$("#start>span").fadeOut();
 			$("#start>span:nth-child("+time+")").css({"display":"block"});
 		}else{
-			stat_t = false;
-			timeStart = true;
-            key_s = true;
-			$("#start").fadeOut(100);
+			stat_t =false;
+			$("#start").fadeOut();
 			user_position();
-//			sessionStorage.setItem("start", "true");
+			sessionStorage.setItem("start", "true");
 			
 		}
 }
@@ -224,12 +167,10 @@ function user_position(){
 		$("#left").animate({left:0});
 			boder_c++;
 			boderColor();
-            nowUser = "red";
 	}else{
 		$("#right").animate({right:0});
 			boder_c =0;
 			boderColor();
-            nowUser = "blue";
 	}
 	
 	
@@ -264,49 +205,7 @@ function bang_f(){
                 }
             }
         }
-    	
-//		plus bang
-        var t = parseInt($("#timer>span").html());
-        
-		if(tp === plus_t && left === plus_l){
-			if(nowUser == "blue"){
-                if(key_no == true){
-                    $("#timer>span").html(t+10);
-                    $("#plus").fadeOut();
-                    key_no = false;
-                }
-            }else{
-                if(key_no == true){
-                    if(t>10){
-                        $("#timer>span").html(t-10);    
-                    }else{
-                        boder_c = 0;
-                        boderColor();   
-                    }
-                    $("#plus").fadeOut();
-                    key_no = false;
-                }
-            }
-		}else if(tp_2 === plus_t && lt_2 === plus_l){
-			if(nowUser == "red"){
-                if(key_no == true){
-                    $("#timer>span").html(t+10);
-                    $("#plus").fadeOut();
-                    key_no = false;
-                }
-            }else{
-                if(key_no == true){
-                    if(t>10){
-                        $("#timer>span").html(t-10);        
-                    }else{
-                        boder_c = 1;
-                        boderColor();
-                    }
-                    $("#plus").fadeOut();
-                    key_no = false;
-                }
-            }
-		}
+    
 }
 
 
@@ -317,17 +216,13 @@ function boderColor(){
         $("#map").css({"border":"red solid 10px"});
         $("#left").animate({left:0});
         $("#right").animate({right:"-"+30+"px"});
-        nowUser = "red";
-        time = 10;
-        $("#timer>span").html(time);
+
     }else{
         boder_c++;
         $("#map").css({"border":"blue solid 10px"})
         $("#right").animate({right:0});
         $("#left").animate({left:"-"+30+"px"});
-        nowUser = "blue";
-        time = 10;
-        $("#timer>span").html(time);
+
     }
 }
 
@@ -336,44 +231,4 @@ function boderColor(){
 
 function regame(){
     location.reload();
-}
-
-//intro next
-function intro_n(){
-	
-	stat_t = true;
-	$("#start>img").fadeOut();
-	$("#start>.start").fadeOut();
-}
-var num =0;
-function intro(){
-    var w_w = $(window).width();
-    if(w_w >1100){
-        if(num > 0){
-            num=0;
-            $("#start>img[alt = intro]").fadeOut();
-            $("#start>.intro_w>span").html("상세 설명");
-        }else{
-             num++;
-            $("#start>img").fadeIn();
-            $("#start>.intro_w>span").html("닫기");
-            //    $("#start>img[alt = intro]").fade();
-        }
-    }else{
-       if(num > 0){
-            num=0;
-            $("#start>img[alt = intro]").fadeOut(100);
-            $("#start>img[alt = introduce]").fadeIn();
-            $("#start>.intro_w").removeAttr("style");
-            $("#start>.intro_w>span").html("상세 설명");
-        }else{
-             num++;
-            $("#start>img").fadeOut(100);
-            $("#start>img[alt = intro]").fadeIn();
-            $("#start>.intro_w").css({"position":"absolute","top":"50px","left":"50%","transform":"translateX(-50%)"})
-            $("#start>.intro_w>span").html("닫기");
-            
-            //    $("#start>img[alt = intro]").fade();
-        } 
-    }    
 }
